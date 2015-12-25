@@ -12,11 +12,9 @@ RUN yum install -y \
     make \
     perl \
     wget \
-    && yum clean all
-    
-RUN groupadd -r pocketmine && useradd -r -g pocketmine pocketmine
-
-RUN mkdir /pocketmine \
+    && yum clean all \
+    && groupadd -r pocketmine && useradd -r -g pocketmine pocketmine \
+    && mkdir /pocketmine \
     && chown -R pocketmine:pocketmine /pocketmine
     
 WORKDIR /pocketmine
@@ -44,9 +42,8 @@ generator-settings=\n\
 level-name=world\n\
 level-seed=\n\
 level-type=DEFAULT\n\
-auto-save=on'> ./server.properties
-
-RUN wget -q -O - http://get.pocketmine.net/ | bash -s - -v development
+auto-save=on'> ./server.properties \    
+&& wget -q -O - http://get.pocketmine.net/ | bash -s - -v development
 
 EXPOSE 19132
 
