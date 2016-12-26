@@ -3,20 +3,16 @@ FROM centos
 MAINTAINER Morten Trydal <trydis@hotmail.com>
 
 RUN yum install -y \
-    autoconf \
-    automake \
-    g++ \
-    gcc \
-    libtool \
-    m4 \
-    make \
-    perl \
-    wget \
+    git libtool-ltdl \
     && yum clean all \
     && groupadd -r pocketmine && useradd -r -g pocketmine pocketmine \
     && mkdir /pocketmine \
-    && chown -R pocketmine:pocketmine /pocketmine
-    
+    && chown -R pocketmine:pocketmine /pocketmine \
+    && git clone --recursive -b mcpe-1.0 https://github.com/pmmp/pocketmine-mp.git pocketmine \
+    && curl -LO https://bintray.com/pocketmine/PocketMine/download_file?file_path=PHP_7.0.6_x86-64_Linux.tar.gz \
+    && tar -xvzf download_file\?file_path\=PHP_7.0.6_x86-64_Linux.tar.gz -C /pocketmine \
+    && rm -f download_file\?file_path\=PHP_7.0.6_x86-64_Linux.tar.gz
+
 WORKDIR /pocketmine
 USER pocketmine
 
@@ -42,8 +38,7 @@ generator-settings=\n\
 level-name=world\n\
 level-seed=\n\
 level-type=DEFAULT\n\
-auto-save=on'> ./server.properties \    
-&& wget -q -O - http://get.pocketmine.net/ | bash -s - -v development
+auto-save=on'> ./server.properties
 
 EXPOSE 19132
 
