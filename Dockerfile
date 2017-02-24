@@ -8,7 +8,7 @@ RUN yum install -y \
     && groupadd -r pocketmine && useradd -r -g pocketmine pocketmine \
     && mkdir /pocketmine \
     && chown -R pocketmine:pocketmine /pocketmine \
-    && git clone --recursive -b 1.6.2dev-3.0.0-ALPHA3 https://github.com/pmmp/pocketmine-mp.git pocketmine \
+    && git clone --recursive -b 1.6.2dev-3.0.0-ALPHA4 https://github.com/pmmp/pocketmine-mp.git pocketmine \
     && curl -LO https://bintray.com/pocketmine/PocketMine/download_file?file_path=PHP_7.0.6_x86-64_Linux.tar.gz \
     && tar -xvzf download_file\?file_path\=PHP_7.0.6_x86-64_Linux.tar.gz -C /pocketmine \
     && rm -f download_file\?file_path\=PHP_7.0.6_x86-64_Linux.tar.gz
